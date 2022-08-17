@@ -1,6 +1,9 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 
+export const appController = {
+    renderLocs
+}
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
@@ -12,8 +15,10 @@ function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready')
+
         })
         .catch(() => console.log('Error: cannot init map'))
+    renderLocs()
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -48,7 +53,22 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
-function onPanTo() {
+function onPanTo(lat, lng) {
     console.log('Panning the Map')
-    mapService.panTo(35.6895, 139.6917)
+    // mapService.panTo(35.6895, 139.6917)
+    mapService.panTo(lat, lng)
+}
+
+function renderLocs() {
+    const places = mapService.getPlaces()
+    console.log(places)
+    let strHTMLs = places.map(place =>
+        `<li>
+            <span><span class="list-item">Name:</span> ${place.name}</span>
+            <span><span class="list-item">LAT: </span> ${place.pos.lat}</span>
+            <span><span class="list-item">LAG: </span>${place.pos.lng}</span>
+            <span class="list-item move-to" onclick="onPanTo('${place.pos.lat}', '${place.pos.lng}')">MOVE TO</span>
+        </li>`
+    )
+    document.querySelector('.locs-list').innerHTML = strHTMLs.join('')
 }
