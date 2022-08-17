@@ -3,7 +3,9 @@ export const mapService = {
     addMarker,
     panTo,
     getPlaces,
-    getGeoLocation
+    getGeoLocation,
+    addPlace,
+    removeLoc
 }
 
 import { utilsService } from './utils.js'
@@ -102,3 +104,8 @@ function getGeoLocation(val) {
         }))
 }
 
+function removeLoc(locId) {
+    const locIdx = gPlaces.findIndex(loc => loc.id === locId)
+    gPlaces.splice(locIdx, 1)
+    storageService.save(STORAGE_KEY, gPlaces)
+}

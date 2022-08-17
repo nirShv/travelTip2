@@ -11,6 +11,7 @@ window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onSubmit = onSubmit
+window.onRemoveLoc = onRemoveLoc
 
 function onInit() {
     mapService.initMap()
@@ -69,6 +70,7 @@ function renderLocs() {
             <span><span class="list-item">LAT: </span> ${place.pos.lat}</span>
             <span><span class="list-item">LAG: </span>${place.pos.lng}</span>
             <span class="list-item move-to" onclick="onPanTo('${place.pos.lat}', '${place.pos.lng}')">MOVE TO</span>
+            <button class="btn btn-del" onclick="onRemoveLoc('${place.id}')">X</button>
         </li>`
     )
     document.querySelector('.locs-list').innerHTML = strHTMLs.join('')
@@ -82,12 +84,22 @@ function onSubmit(ev) {
     const val = elInputSearch.value
     elInputSearch.value = ""
     console.log('val', val);
-    console.log('onSubmit', mapService.getGeoLocation(val).then(res=>mapService.panTo(res.lat, res.lng)))
-    .then((res)=>changeSearchParams(res.name))
+    mapService.getGeoLocation(val).then(res => {
+        mapService.panTo(res.lat, res.lng)
+        mapService.addMarker({ lat: res.lat, lng: res.lng })
+        mapService.addPlace({ lat: res.lat, lng: res.lng }, val)
+        renderLocs()
+        changeSearchParams(res.name, res.lat, res.lng)
+    })
 }
 
-function changeSearchParams(data){
-    const queryStringParams = `?name=${data}&minRate=${filterBy.minRate}&maxPrice=${filterBy.maxPrice}`
+function changeSearchParams(name, lat, lng) {
+    const queryStringParams = `?name=${name}&lat=${lat}&lng=${lng}`
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
     window.history.pushState({ path: newUrl }, '', newUrl)
+}
+
+function onRemoveLoc(locId) {
+    mapService.removeLoc(locId)
+    renderLocs()
 }
