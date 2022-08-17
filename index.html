@@ -13,11 +13,14 @@
 
     <header class="flex space-between inline-padding">
         <div class="logo">TravelTip</div>
-        <div class="header-options">
-            <form onsubmit="onSubmit(event)">
-                <input type="search" class="search" placeholder="search" />
-                <button onclick="onGetUserPos()" class="btn-user-pos">Find me</button>
-            </form>
+        <div class="header-options flex">
+            <div class="search-area">
+                <form onsubmit="onSubmit(event)">
+                    <input type="search" class="search" placeholder="search" />
+                    <button class="btn go-btn">go</button>
+                </form>
+            </div>
+            <button onclick="onGetUserPos()" class="btn-user-pos">Find me</button>
         </div>
     </header>
 
@@ -27,14 +30,14 @@
             <div class="current-location">
                 <p>Location: <span class="user-pos"></span></p>
             </div>
-            <button>Copy Location</button>
+            <button class="btn copy-location-btn">Copy Location</button>
         </div>
-        <div class="main-container flex flex-row">
+        <div class="main-container flex flex-row inline-padding">
 
             <div class="curr-location-section">
                 <div> weather area</div>
-                <!-- <p>Locations: 
-                    <pre class="locs"></pre>
+                <!-- <p>Locations:
+                <pre class="locs"></pre>
                 </p> -->
                 <div class="locs-list-container">
                     <ul class="locs-list"></ul>
@@ -43,9 +46,11 @@
 
             <div class="map-container flex flex-column">
                 <div id="map" style="width: 100%; height: 300px;"></div>
-                <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-                <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-                <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+                <div class="btns-container">
+                    <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
+                    <!-- <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button> -->
+                    <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+                </div>
             </div>
         </div>
 
