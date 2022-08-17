@@ -71,9 +71,9 @@ function renderLocs() {
     console.log(places)
     let strHTMLs = places.map(place =>
         `<li>
-            <span><span class="list-item">Name:</span> ${place.name}</span>
-            <span><span class="list-item">LAT: </span> ${place.pos.lat}</span>
-            <span><span class="list-item">LAG: </span>${place.pos.lng}</span>
+            <span><span class="list-item">Name: &nbsp;</span> ${place.name},</span>
+            <span><span class="list-item">LAT: &nbsp;</span> ${place.pos.lat},</span>
+            <span><span class="list-item">LAG: &nbsp;</span>${place.pos.lng}</span>
         </li>
         <div>
         <span class="list-item move-to" onclick="onPanTo('${place.pos.lat}', '${place.pos.lng}')">Move There</span>

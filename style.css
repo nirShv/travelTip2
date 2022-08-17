@@ -146,6 +146,10 @@ body {
     font-size: 25px;
 }
 
+li span{
+    text-transform: capitalize;
+}
+
 
 /* buttons  */
 
@@ -163,6 +167,10 @@ span.move-to:hover,
     cursor: pointer;
     background-color: white;
     color:var(--theme-color);
+}
+
+.locs-list li{
+    margin-top: 10px;
 }
 
 .copy-location-btn {
