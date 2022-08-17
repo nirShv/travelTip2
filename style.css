@@ -1,4 +1,5 @@
 
+
 :root{
     --theme-color: rgb(59, 59, 162);
     --theme-color-light: rgb(203, 203, 231) ;
@@ -123,3 +124,22 @@ button:hover{
     background-color: var(--theme-color);
 }
 
+
+/* media query  */
+
+/* SMALL */
+@media (max-width: 600px) {
+
+    .main-container{
+        flex-direction: column;
+        border: 2px solid green;
+    }
+
+  
+  }
+  
+
+  /* LARGE  */
+  @media (min-width: 600px) {
+
+  }
