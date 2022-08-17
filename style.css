@@ -137,3 +137,32 @@ button:hover {
     position: relative;
     float: right;
 }
+
+
+/* media q  */
+
+
+/* SMALL */
+@media (max-width: 600px) {
+
+    .main-container{
+        flex-direction: column-reverse;
+    }
+
+    .curr-location-section,
+    .map-container{
+        width: 100%;
+    }
+
+}
+
+/* LARGE  */
+@media (min-width: 600px) {
+
+    .main-container{
+       flex-direction: row;
+    }
+
+   
+
+}

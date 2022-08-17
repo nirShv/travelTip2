@@ -49,7 +49,10 @@ function onGetUserPos() {
         .then(pos => {
             console.log('User position is:', pos.coords)
             document.querySelector('.user-pos').innerText =
-                `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+                // `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+                `Your Location`
+                mapService.panTo(pos.coords.latitude,pos.coords.longitude)
+                mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude })
         })
         .catch(err => {
             console.log('err!!!', err)
@@ -90,6 +93,7 @@ function onSubmit(ev) {
         mapService.addPlace({ lat: res.lat, lng: res.lng }, val)
         renderLocs()
         changeSearchParams(res.name, res.lat, res.lng)
+        document.querySelector('.user-pos').innerText = val
     })
 }
 
