@@ -1,16 +1,18 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    getPlaces,
 }
 
 import { utilsService } from './utils.js'
 import { storageService } from './storage.service.js'
-
+import { appController } from '../app.controller.js'
 
 // Var that is used throughout this Module (not global)
-var gMap
-var gPlaces = []
+const STORAGE_KEY = 'places'
+let gMap
+let gPlaces = storageService.load(STORAGE_KEY) || []
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap')
@@ -28,19 +30,18 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 const lat = mapsMouseEvent.latLng.lat()
                 const lng = mapsMouseEvent.latLng.lng()
                 const position = { lat, lng }
-            
+
                 const locationName = prompt('Enter location name')
                 if (locationName) {
-                  onAddPlace(position, locationName)
-            
-                  new google.maps.Marker({
-                    position: position,
-                    map: gMap,
-                  })
+                    onAddPlace(position, locationName)
+
+                    new google.maps.Marker({
+                        position: position,
+                        map: gMap,
+                    })
                 }
-              })
-
-
+                appController.renderLocs()
+            })
         })
 }
 
@@ -76,9 +77,13 @@ function _connectGoogleApi() {
 function onAddPlace(pos, name) {
     addPlace(pos, name)
     // renderPlaces()
-  }
+}
 
 function addPlace(pos, name) {
-    gPlaces.push({ id:utilsService.makeId(3), pos, name })
-    storageService.save('places', gPlaces)
-  }
+    gPlaces.push({ id: utilsService.makeId(3), pos, name })
+    storageService.save(STORAGE_KEY, gPlaces)
+}
+
+function getPlaces() {
+    return storageService.load(STORAGE_KEY)
+}
