@@ -101,3 +101,4 @@ function getGeoLocation(val) {
             lng: res.data.results[0].geometry.location.lng
         }))
 }
+

@@ -83,4 +83,11 @@ function onSubmit(ev) {
     elInputSearch.value = ""
     console.log('val', val);
     console.log('onSubmit', mapService.getGeoLocation(val).then(res=>mapService.panTo(res.lat, res.lng)))
+    .then((res)=>changeSearchParams(res.name))
+}
+
+function changeSearchParams(data){
+    const queryStringParams = `?name=${data}&minRate=${filterBy.minRate}&maxPrice=${filterBy.maxPrice}`
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
+    window.history.pushState({ path: newUrl }, '', newUrl)
 }
