@@ -74,9 +74,11 @@ function renderLocs() {
             <span><span class="list-item">Name:</span> ${place.name}</span>
             <span><span class="list-item">LAT: </span> ${place.pos.lat}</span>
             <span><span class="list-item">LAG: </span>${place.pos.lng}</span>
-            <span class="list-item move-to" onclick="onPanTo('${place.pos.lat}', '${place.pos.lng}')">MOVE TO</span>
-            <button class="btn btn-del" onclick="onRemoveLoc('${place.id}')">X</button>
-        </li>`
+        </li>
+        <div>
+        <span class="list-item move-to" onclick="onPanTo('${place.pos.lat}', '${place.pos.lng}')">Move There</span>
+        <span class="btn btn-del" onclick="onRemoveLoc('${place.id}')">X</span>
+        </div>`
     )
     document.querySelector('.locs-list').innerHTML = strHTMLs.join('')
 }

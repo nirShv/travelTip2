@@ -45,6 +45,38 @@ header {
 
 }
 
+/* TYPOGROPHY  */
+
+@font-face {
+    font-family: ga;
+    src: url("../travelTip2/fonts/fontawesome/fa-brands-400.ttf");
+    /* src: url(/fonts/fontawesome/fa-brands-400.ttf); */
+} 
+@font-face {
+    font-family: lato;
+    src: url("../fonts/lato/Lato-Regular.ttf");
+}
+
+@font-face {
+    font-family: fa;
+    src: url("../travelTip2/fonts/fontawesome/fa-solid-900.ttf");
+    /* src: url(/fonts/fontawesome/fa-solid-900.ttf); */
+} 
+
+.fa::before {
+    font-family: fa;
+}
+.ga::before {
+    font-family: ga;
+}
+
+.fa.location::before {
+    content: "\f601";
+}
+.ga.location::before {
+    content: "\f601";
+}
+
 /* components  */
 
 /* header  */
@@ -55,14 +87,15 @@ header {
     color: whitesmoke;
 }
 
+.logo span{
+    color: var(--theme-color-light);
+    font-size: 25px;
+}
+
 input {
     height: 30px;
     padding: 0;
-}
-
-
-.header-options {
-    /* border: 2px solid green; */
+    margin-right: 10px;
 }
 
 .search-area {
@@ -79,6 +112,7 @@ input {
 body {
     background-color: var(--theme-color-light);
     margin: 0;
+    font-family: lato;
 }
 
 
@@ -97,6 +131,7 @@ body {
     width: 50%;
 }
 
+
 .map-container {
     /* border: 3px solid red; */
     width: 50%;
@@ -113,6 +148,22 @@ body {
 
 
 /* buttons  */
+
+span.move-to,
+.btn-del{
+    background-color: aliceblue ;
+    color: var(--theme-color);
+    /* border-radius: 5px; */
+    border: 1px solid var(--theme-color);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+span.move-to:hover,
+.btn-del:hover{
+    cursor: pointer;
+    background-color: white;
+    color:var(--theme-color);
+}
 
 .copy-location-btn {
     height: 30px;
@@ -133,10 +184,10 @@ button:hover {
     margin-bottom: 10px;
 }
 
-.btn-del {
+/* .btn-del {
     position: relative;
     float: right;
-}
+} */
 
 
 /* media q  */
@@ -152,6 +203,19 @@ button:hover {
     .curr-location-section,
     .map-container{
         width: 100%;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+        
+    .logo span{
+        font-size: 15px;
+    }
+
+    header{
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
 }
