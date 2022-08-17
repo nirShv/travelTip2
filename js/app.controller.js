@@ -10,6 +10,7 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onSubmit = onSubmit
 
 function onInit() {
     mapService.initMap()
@@ -71,4 +72,15 @@ function renderLocs() {
         </li>`
     )
     document.querySelector('.locs-list').innerHTML = strHTMLs.join('')
+}
+// onSubmit('tel aviv')
+function onSubmit(ev) {
+    if (ev) ev.preventDefault()
+    const elInputSearch = document.querySelector('.search')
+    // console.log('ev',ev);
+    // const val=ev.target.value
+    const val = elInputSearch.value
+    elInputSearch.value = ""
+    console.log('val', val);
+    console.log('onSubmit', mapService.getGeoLocation(val).then(res=>mapService.panTo(res.lat, res.lng)))
 }

@@ -3,6 +3,7 @@ export const mapService = {
     addMarker,
     panTo,
     getPlaces,
+    getGeoLocation
 }
 
 import { utilsService } from './utils.js'
@@ -13,6 +14,8 @@ import { appController } from '../app.controller.js'
 const STORAGE_KEY = 'places'
 let gMap
 let gPlaces = storageService.load(STORAGE_KEY) || []
+
+
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap')
@@ -86,4 +89,15 @@ function addPlace(pos, name) {
 
 function getPlaces() {
     return storageService.load(STORAGE_KEY)
+}
+
+function getGeoLocation(val) {
+    var str = val.replace(' ', '+')
+    const GEO_API = `https://maps.googleapis.com/maps/api/geocode/json?address=${str}&key=AIzaSyCTggHj3ZacaigFcNiLyQKvEjeiZCspxwc`
+    return axios.get(GEO_API)
+        .then(res => ({
+            name: res.data.results[0].formatted_address,
+            lat: res.data.results[0].geometry.location.lat,
+            lng: res.data.results[0].geometry.location.lng
+        }))
 }
