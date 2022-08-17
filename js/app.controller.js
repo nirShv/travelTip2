@@ -12,11 +12,13 @@ window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onSubmit = onSubmit
 window.onRemoveLoc = onRemoveLoc
+window.onCopyLocation = onCopyLocation
 
 function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready')
+            renderFilterByQueryStringParams()
 
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -106,4 +108,24 @@ function changeSearchParams(name, lat, lng) {
 function onRemoveLoc(locId) {
     mapService.removeLoc(locId)
     renderLocs()
+}
+
+function renderFilterByQueryStringParams() {
+    const queryStringParams = new URLSearchParams(window.location.search)
+    const filterBy = {
+        lat: +queryStringParams.get('lat') || '',
+        lng: +queryStringParams.get('lng') || ''
+    }
+
+    if (!filterBy.lat && !filterBy.lng) return
+
+    console.log('filterBy', filterBy);
+    mapService.panTo(filterBy.lat, filterBy.lng)
+    mapService.addMarker(filterBy)
+}
+
+function onCopyLocation() {
+    const queryStringParams = new URLSearchParams(window.location.search)
+    const url = `https://nirshv.github.io/travelTip2/?${queryStringParams}`
+    navigator.clipboard.writeText(url)
 }
