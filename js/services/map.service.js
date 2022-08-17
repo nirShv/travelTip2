@@ -3,7 +3,8 @@ export const mapService = {
     addMarker,
     panTo,
     getPlaces,
-    getGeoLocation
+    getGeoLocation,
+    addPlace
 }
 
 import { utilsService } from './utils.js'
