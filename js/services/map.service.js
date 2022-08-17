@@ -4,6 +4,7 @@ export const mapService = {
     panTo,
     getPlaces,
     getGeoLocation,
+    addPlace,
     removeLoc
 }
 

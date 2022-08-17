@@ -86,6 +86,9 @@ function onSubmit(ev) {
     console.log('val', val);
     mapService.getGeoLocation(val).then(res => {
         mapService.panTo(res.lat, res.lng)
+        mapService.addMarker({ lat: res.lat, lng: res.lng })
+        mapService.addPlace({ lat: res.lat, lng: res.lng }, val)
+        renderLocs()
         changeSearchParams(res.name, res.lat, res.lng)
     })
 }
