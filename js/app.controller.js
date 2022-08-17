@@ -82,12 +82,14 @@ function onSubmit(ev) {
     const val = elInputSearch.value
     elInputSearch.value = ""
     console.log('val', val);
-    console.log('onSubmit', mapService.getGeoLocation(val).then(res=>mapService.panTo(res.lat, res.lng)))
-    .then((res)=>changeSearchParams(res.name))
+    mapService.getGeoLocation(val).then(res=>{
+        mapService.panTo(res.lat, res.lng)
+        changeSearchParams(res.name,res.lat, res.lng)
+    })
 }
 
-function changeSearchParams(data){
-    const queryStringParams = `?name=${data}&minRate=${filterBy.minRate}&maxPrice=${filterBy.maxPrice}`
+function changeSearchParams(name,lat,lng){
+    const queryStringParams = `?name=${name}&lat=${lat}&lng=${lng}`
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
     window.history.pushState({ path: newUrl }, '', newUrl)
 }
